@@ -1,0 +1,218 @@
+\documentclass[a4paper]{article} %размер бумаги устанавливаем А4
+% \usepackage[T2A]{fontenc}
+\usepackage{polyglossia}
+\setmainlanguage[babelshorthands=true]{russian} % Язык по-умолчанию русский с поддержкой приятных команд пакета babel
+\setotherlanguage{english} % Дополнительный язык = английский (в американской вариации по-умолчанию)
+\newfontfamily{\cyrillicfonttt}{Times New Roman}
+% \newfontfamily\cyrillicfont{Times New Roman}
+\usepackage{minted} %пакет для подсветки кода
+\usepackage{color}
+\usepackage{xcolor} % to access the named colour LightGray
+\definecolor{LightGray}{gray}{0.9}
+
+% для отступа в первом абзаце
+\usepackage{indentfirst} 
+\parindent=1.25cm % длина отступа в абзацах
+% для продвинутых списков
+\usepackage{enumitem} 
+\usepackage{amssymb,amsfonts,amsmath,cite,enumerate,float,indentfirst} %пакеты расширений
+\usepackage{graphicx}% для вставки картинок
+\usepackage{url} % добавляем поддержку url-ссылок
+\usepackage{hyperref} % пакет для интеграции гиперссылок
+\usepackage{amsmath} % добавляем поддержку математических символов
+\usepackage{multirow} % понадобится для создания таблицы с объединенными строками
+\usepackage{pdfpages}% Добавление внешних pdf файлов
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\mdseries}
+\renewcommand{\cftsecpagefont}{\mdseries}
+\cftsetindents{section}{0em}{2em}
+\cftsetindents{subsection}{0em}{3em}
+\cftsetindents{subsubsection}{0em}{4em}
+\renewcommand\cfttoctitlefont{\hfill\normalsize\mdseries}
+\renewcommand\cftaftertoctitle{\hfill\mbox{}}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+
+\usepackage{fontspec}
+\setmainfont{Times New Roman} %шрифт 
+\graphicspath{{images/}}%путь к рисункам
+\usepackage[14pt]{extsizes} % для того чтобы задать нестандартный 14-ый размер шрифта
+
+%\makeatletter
+%\renewcommand{\@biblabel}[1]{#1.} % Заменяем библиографию с квадратных скобок на точку:
+%\makeatother
+
+
+\usepackage[tableposition=top]{caption}
+\usepackage{subcaption}
+\DeclareCaptionLabelFormat{gostfigure}{Рисунок #2}
+\DeclareCaptionLabelFormat{gosttable}{Таблица #2}
+\DeclareCaptionLabelSeparator{gost}{~–~}
+\captionsetup{labelsep=gost}
+\captionsetup[figure]{labelformat=gostfigure}
+\captionsetup[table]{labelformat=gosttable}
+\renewcommand{\thesubfigure}{\asbuk{subfigure}}
+
+
+\makeatletter
+
+\renewcommand{\section}{\@startsection{section}{1}{0pt}%
+                                {-3.5ex plus -1ex minus -.2ex}%
+                                {2.3ex plus .2ex}%
+{\centering\hyphenpenalty=10000\normalfont\normalsize\mdseries}}
+
+\renewcommand{\subsection}{\@startsection{subsection}{1}{0pt}%
+                                {-3.5ex plus -1ex minus -.2ex}%
+                                {2.3ex plus .2ex}%
+{\centering\hyphenpenalty=10000\normalfont\normalsize\mdseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{1}{0pt}%
+                                {-3.5ex plus -1ex minus -.2ex}%
+                                {2.3ex plus .2ex}%
+{\centering\hyphenpenalty=10000\normalfont\normalsize\mdseries}}
+\makeatother
+
+
+%\renewcommand{\bibname}{Список использованных источников}
+%\addcontentsline{toc}{chapter}{Список использованных источников}
+% \usepackage{pdflscape}
+
+\usepackage{setspace}
+% выравнивание по ширине
+\sloppy
+
+
+
+%%% Поля и разметка страницы %%%
+\usepackage{pdflscape}  % Для включения альбомных страниц
+\usepackage{geometry}   % Для последующего задания полей
+
+
+\geometry{left=3cm}% левое поле
+\geometry{right=1.5cm}% правое поле
+\geometry{top=2cm}% верхнее поле
+\geometry{bottom=2cm}% нижнее поле
+
+\renewcommand{\theenumi}{\arabic{enumi}}% Меняем везде перечисления на цифра.цифра
+\renewcommand{\labelenumi}{\arabic{enumi}}% Меняем везде перечисления на цифра.цифра
+\renewcommand{\theenumii}{.\arabic{enumii}}% Меняем везде перечисления на цифра.цифра
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}.}% Меняем везде перечисления на цифра.цифра
+\renewcommand{\theenumiii}{.\arabic{enumiii}}% Меняем везде перечисления на цифра.цифра
+\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.}% Меняем везде перечисления на цифра.цифра
+\usepackage{lastpage}
+
+
+
+\newcommand{\imgh}[3]{\begin{figure}[h]\center{\includegraphics[width=#1]{#2}}\caption{#3}\label{ris:#2}\end{figure}}
+\newcommand{\imghh}[3]{\begin{figure}[H]\center{\includegraphics[width=#1]{#2}}\caption{#3}\label{ris:#2}\end{figure}}
+\usepackage{totcount}
+% \newtotcounter{foofigure}
+
+% \makeatletter
+% \renewenvironment{figure}[1][\fps@figure]{
+  % \edef\@tempa{\noexpand\@float{figure}[#1]}
+  % \@tempa
+  % \addtocounter{foofigure}{1}
+% }{
+  % \end@float
+% }
+% \makeatother
+
+
+
+\newcounter{totfigures}
+\newcounter{tottables}
+\newcounter{totreferences}
+
+\makeatletter
+    \AtEndDocument{%
+      \addtocounter{totfigures}{\value{figure}}%
+      \addtocounter{tottables}{\value{table}}%
+	  
+      \immediate\write\@mainaux{%
+        \string\gdef\string\totfig{\number\value{totfigures}}%
+        \string\gdef\string\tottab{\number\value{tottables}}%   
+
+      }%
+    }
+\makeatother
+
+	
+
+\newcommand{\empline}{\mbox{}\newline}
+\newcommand{\likechapterheading}[1]{ 
+    \begin{center}
+   \MakeUppercase{#1}
+    \end{center}
+    \empline}
+
+
+
+\makeatletter
+    \renewcommand{\@dotsep}{2}
+    \newcommand{\l@likechapter}[2]{{\@dottedtocline{0}{0pt}{0pt}{#1}{#2}}}
+\makeatother
+\newcommand{\likechapter}[1]{    
+    \likechapterheading{#1}    
+    \addcontentsline{toc}{likechapter}{\MakeUppercase{#1}}}
+
+
+
+
+\usepackage{cite} % Красивые ссылки на литературу
+
+
+%% Список литературы с красной строки (без висячего отступа) %%%
+\patchcmd{\thebibliography} %может потребовать включения пакета etoolbox
+ {\advance\leftmargin\labelsep}
+ {\leftmargin=0pt%
+  \setlength{\labelsep}{\widthof{\ }}% Управляет длиной отступа после точки
+  \itemindent=\parindent%
+  \addtolength{\itemindent}{\labelwidth}% Сдвигаем правее на величину номера с точкой
+  \advance\itemindent\labelsep%
+ }
+ {}{}
+
+
+\makeatletter
+\def\@biblabel#1{#1 }
+\makeatother
+
+
+\begin{document}
+
+\input{Title}% это титульный лист
+\input{task}% это задание
+\input{referat}% это реферат
+\input{cont}% это содержание
+\input{intro}% это введение
+
+
+\input{RefProject-base}% осн часть
+
+ \input{structure}% это раздел структурной схемы
+ 
+% \input{append}% это приложение
+\input{biblio}% это приложение
+
+
+
+
+%\begin{landscape}
+% текст в альбомной ориентации
+% (таблица, рисунок, схема и т. п.)
+%\end{landscape}
+
+% \likechapter{Вступление}
+% ебал все в рот
+
+
+
+%\input{RefProject-App}% приложение
+
+
+
+
+
+
+
+
+\end{document}
