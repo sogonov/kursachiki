@@ -1,6 +1,7 @@
 \documentclass[a4paper]{article} %размер бумаги устанавливаем А4
 % \usepackage[T2A]{fontenc}
 \usepackage{polyglossia}
+\usepackage{url} % добавляем поддержку url-ссылок
 \setmainlanguage[babelshorthands=true]{russian} % Язык по-умолчанию русский с поддержкой приятных команд пакета babel
 \setotherlanguage{english} % Дополнительный язык = английский (в американской вариации по-умолчанию)
 \newfontfamily{\cyrillicfonttt}{Times New Roman}
@@ -9,7 +10,7 @@
 \usepackage{color}
 \usepackage{xcolor} % to access the named colour LightGray
 \definecolor{LightGray}{gray}{0.9}
-
+\setdefaultlanguage[forceheadingpunctuation=false]{russian}
 % для отступа в первом абзаце
 \usepackage{indentfirst} 
 \parindent=1.25cm % длина отступа в абзацах
@@ -172,6 +173,21 @@
 \makeatother
 
 
+% настройки цветовой палитры для гиперссылок. Цвета можно на свой вкус выбрать здесь:  https://www.overleaf.com/learn/latex/Using_colours_in_LaTeX
+\hypersetup{
+    citecolor=gray, % цвет цитирования
+    colorlinks=true, 
+    linkcolor=black, % цвет для гиперссылок 
+    filecolor=magenta, % цвет для ссылок на файл      
+    urlcolor=mauve} % цвет для url-ссылок
+    \usepackage{listings}
+
+\usepackage{color}
+\definecolor{dkgreen}{rgb}{0,0.6,0} 
+\definecolor{gray}{rgb}{0.3,0.3,0.3}
+\definecolor{mauve}{rgb}{0.42,0,0.92}
+
+	
 \begin{document}
 
 \input{01_title}% это титульный лист
@@ -184,11 +200,13 @@
 \input{08_program}% это раздел принципиальной схемы
 \input{09_final}% это заключение
 \input{10_biblio}% это список использованных источников
- 
+\includepdf{dg.pdf}
+% текст в альбомной ориентации
+% (таблица, рисунок, схема и т. п.)
+
 % \input{append}% это приложение
 
 % \input{RefProject-base}% осн часть
-
 
 
 %\begin{landscape}
