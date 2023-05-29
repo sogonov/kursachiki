@@ -43,6 +43,8 @@
 %\makeatother
 
 
+
+
 \usepackage[tableposition=top]{caption}
 \usepackage{subcaption}
 \DeclareCaptionLabelFormat{gostfigure}{Рисунок #2}
@@ -187,6 +189,80 @@
 \definecolor{gray}{rgb}{0.3,0.3,0.3}
 \definecolor{mauve}{rgb}{0.42,0,0.92}
 
+
+
+\let\bfseries\mdseries 
+% грязный хак для удаления жирного текста по всему документу
+
+\usepackage[version=3]{acro}
+
+\DeclareAcroProperty{unit}
+
+\DeclareAcronym{BLE}{ 
+    short = {BLE}, 
+    long  = {Bluetooth Low-Energy },
+	unit = --, 
+}
+
+\DeclareAcronym{AFE}{
+    short = {AFE},
+    long  = {Analog Front End},
+	unit = --, 
+}
+
+\DeclareAcronym{АЦП}{
+  short            = АЦП ,
+  long             = Аналого-цифровой преобразователь ,
+	unit = --, 
+}
+
+
+\DeclareAcronym{ЭКГ}{
+  short            = ЭКГ ,
+  long             = Электрокардиограмма ,
+  unit = --, 
+}
+
+\acsetup{
+  make-links,
+  list/heading = empty,
+  % pages/display = all ,
+  pages/fill = {, },
+}
+
+
+\usepackage{longtable,siunitx}
+
+\NewAcroTemplate[list]{physics}{%
+  \acronymsmapT{%
+    \AcroAddRow{%
+      \acrowrite{short}%
+      &
+      \acrowrite{unit}%
+      &
+      \acrowrite{list}%
+      &
+      \acropages
+        {\acrotranslate{page}\nobreakspace}%
+        {\acrotranslate{pages}\nobreakspace}%
+      \tabularnewline
+    }%
+  }%
+  
+  
+  \acroheading
+  \acropreamble
+  
+  \par\noindent
+  \setlength\LTleft{0pt}%
+  \setlength\LTright{0pt}%
+  
+  \begin{longtable}{@{}lll@{\extracolsep{\fill}}l@{}}
+    \AcronymTable
+  \end{longtable}
+}
+
+
 	
 \begin{document}
 
@@ -200,11 +276,9 @@
 \input{08_program}% это раздел принципиальной схемы
 \input{09_final}% это заключение
 \input{10_biblio}% это список использованных источников
-\includepdf{dg.pdf}
-% текст в альбомной ориентации
-% (таблица, рисунок, схема и т. п.)
+\input{11_socr}% это список cокращений и источников
 
-% \input{append}% это приложение
+
 
 % \input{RefProject-base}% осн часть
 
@@ -215,13 +289,6 @@
 %\end{landscape}
 
 % \likechapter{Вступление}
-% ебал все в рот
-
-
-
-%\input{RefProject-App}% приложение
-
-
 
 
 
