@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2023-06-07T03:01:33.293Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 YaBrowser/23.5.1.714 Yowser/2.5 Safari/537.36" etag="2Ki29-0MupiF4nt2fGXB" version="21.3.7" type="device">
+<mxfile host="app.diagrams.net" modified="2023-06-07T12:01:06.636Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 YaBrowser/23.5.1.714 Yowser/2.5 Safari/537.36" etag="FSH2cmcAfMUrMfD0DSJo" version="21.3.7" type="device">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="1173" dy="607" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1173" dy="792" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
@@ -13,14 +13,14 @@
         <mxCell id="0jioDBSxinuSy6Dj_WKI-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="0jioDBSxinuSy6Dj_WKI-2" target="0jioDBSxinuSy6Dj_WKI-3" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="0jioDBSxinuSy6Dj_WKI-2" value="Инициализация периферии(GPIO, тактирование, таймеры, I2C)" style="rounded=0;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="125" y="120" width="120" height="60" as="geometry" />
+        <mxCell id="0jioDBSxinuSy6Dj_WKI-2" value="Инициализация периферии(GPIO, тактирование, таймеры, SPI)" style="rounded=0;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="90" y="120" width="185" height="60" as="geometry" />
         </mxCell>
         <mxCell id="0jioDBSxinuSy6Dj_WKI-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="0jioDBSxinuSy6Dj_WKI-3" target="0jioDBSxinuSy6Dj_WKI-7" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="0jioDBSxinuSy6Dj_WKI-3" value="настройка и инициализация ADX345" style="rounded=0;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="125" y="200" width="120" height="60" as="geometry" />
+          <mxGeometry x="72.5" y="200" width="225" height="60" as="geometry" />
         </mxCell>
         <mxCell id="YVnihNJ5MQt2XE-lKtCS-0" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="0jioDBSxinuSy6Dj_WKI-7" edge="1">
           <mxGeometry relative="1" as="geometry">
