@@ -101,6 +101,8 @@ IPCC_HandleTypeDef hipcc;
 
 RTC_HandleTypeDef hrtc;
 
+TIM_HandleTypeDef htim2;
+
 /* USER CODE BEGIN PV */
 uint8_t data_rec[6]; //массив для хранения данных при чтении
 int16_t x, y, z;//переменные для хранения значений ускорения в необработанном формате
@@ -227,7 +229,9 @@ int main(void)
     	uint16_t dataX = adxl_read(DATAX0)|(adxl_read(DATAX1)<<8);
     	uint16_t dataY = adxl_read(DATAY0)|(adxl_read(DATAY1)<<8);
     	uint16_t dataZ = adxl_read(DATAZ0)|(adxl_read(DATAZ1)<<8);
+    	if (){
 
+    	}
 
     }
 
@@ -237,6 +241,39 @@ int main(void)
   }
   /* USER CODE END 3 */
 }
+
+
+
+
+
+void EXTI4_15_IRQHandler(void) //Прерывание по старту импульса с пинов РА4(INT1) и РА5(INT2)
+{
+	if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_5) == GPIO_PIN_SET){   //Узнаем на каком выводе РА5 или РА4 был импульс
+		if( upd_flg == false){      //Если этот флаг не активен, то
+			 HAL_TIM_Base_Start(&htim2); //Запускаем таймер для считывания данных
+			  upd_flg=true;
+		  }
+	}
+	else{
+		if( ff_flg == false){
+			HAL_TIM_Base_Start(&htim2); //Запускаем таймер для считывания данных
+			ff_flg= true;
+		}
+	}
+	HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_5|GPIO_PIN_6); //сброс флага прерывания
+}
+
+
+
+void TIM2_IRQHandler(void)//прерывание от таймера - запускает акселерометр каждые 2.5мс
+{
+	launch_flg = true;
+	__HAL_TIM_SET_COUNTER(&htim2, 0); //Сбрасываем значение счетчика для дальнейшего счета
+	HAL_TIM_IRQHandler(&htim2); //Сброс флагов таймера
+
+}
+
+
 
 /**
   * @brief System Clock Configuration
@@ -432,6 +469,51 @@ static void MX_RTC_Init(void)//настройки часов реального 
 }
 
 
+
+/**
+  * @brief TIM2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM2_Init(void)
+{
+
+  /* USER CODE BEGIN TIM2_Init 0 */
+
+  /* USER CODE END TIM2_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM2_Init 1 */
+
+  /* USER CODE END TIM2_Init 1 */
+  htim2.Instance = TIM2;
+  htim2.Init.Prescaler = 640-1;
+  htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim2.Init.Period = 2500;
+  htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim2, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM2_Init 2 */
+
+  /* USER CODE END TIM2_Init 2 */
+
+}
 
 /**
   * @brief RF Initialization Function

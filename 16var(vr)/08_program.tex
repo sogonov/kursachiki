@@ -5,12 +5,9 @@
 
 Проанализируем задание, учитывая ранее описанное. Необходимо получать данные от \ac{AFE} микросхемы ADS1293 по интерфейсу SPI, записывать их во флеш-память W25Q128. Так же данные передаются по интерфейсу Bluetooth.
 
-% Передача данных 
- 
-% Требуется обновлять данные с частотой 400Гц --  для этого нужен таймер. Нужно каким-то образом обрабатывать полученные данные и отсылать результат по Bluetooth. 
 
-% Для работы программы необходимо для начала разработать алгоритм. Алгоритм нашего устройства представлен на рисунке \ref{ris:prog/algo.png}.
-% \imghh{150mm}{prog/algo.png}{Алгоритм работы устройства}
+Для работы программы необходимо для начала разработать алгоритм. Алгоритм нашего устройства представлен на рисунке \ref{ris:prog/algo.png}.
+\imghh{150mm}{prog/algo.png}{Алгоритм работы устройства}
 
 
 % Главное тело программы работает так -  инициализирует всю необходимую переферию микроконтроллера, после чего проверяет launch\_flg - флаг, который поднимается в прерывании от таймера каждые 2.5мс, что соответствует частоте обновления данных в 400Гц. 
@@ -87,7 +84,7 @@ fontsize=\footnotesize, %размер шрифта
 
 
 /* USER CODE BEGIN PV */
-uint8_t send_ble[12] = {0,0};
+uint8_t send_ble[2] = {0,0};
 /* USER CODE END PV */
 
 /* USER CODE BEGIN WHILE */
@@ -172,28 +169,25 @@ fontsize=\footnotesize, %размер шрифта
 ]{C}
 
 /* USER CODE BEGIN PTD */
-unsigned char inputMessage = 0; \\локальная переменная
-uint8_t local[2] = {0,0};\\массив для передачи
+unsigned char inputMessage = 0; //локальная переменная
+uint8_t local[2] = {0,0};//массив для передачи
 /* USER CODE END PTD */
 
 /* USER CODE BEGIN PD */
-void P2PS_Send_Notification(void);\\прототип функции, отправляющей данные по Bluetooth
+void P2PS_Send_Notification(void);//прототип функции, отправляющей данные по Bluetooth
 /* USER CODE END PD */
 
 /* USER CODE BEGIN P2PS_STM_WRITE_EVT */
-inputMessage = pNotification->DataTransfered.pPayload[1]; \\присваиваем элементу структуры DataTransfered зна
-CDC_Transmit_FS((uint8_t *)&inputMessage, 1);
-CDC_Transmit_FS((uint8_t *)"\r", 1);
+inputMessage = pNotification->DataTransfered.pPayload[1]; //присваиваем переременной значение из элемента структуры DataTransfered
 /* USER CODE END P2PS_STM_WRITE_EVT */
-
+g
 /* USER CODE BEGIN FD_LOCAL_FUNCTIONS*/
-void P2PS_Send_Notification(void)
+void P2PS_Send_Notification(void) 
 {
-CDC_Transmit_FS((uint8_t *)mrxUart, 1);
-CDC_Transmit_FS((uint8_t *)"\r", 1);
-local[1] = mrxUart[0];
+// формируем посылку
+local[1] = send_ble[0];
 local[0] = 1;
-P2PS_STM_App_Update_Char(P2P_NOTIFY_CHAR_UUID, (uint8_t *)(&local));
+P2PS_STM_App_Update_Char(P2P_NOTIFY_CHAR_UUID, (uint8_t *)(&local));//отправляем данные по Bluetooth.
 }
 /* USER CODE END FD_LOCAL_FUNCTIONS*/
 
@@ -202,6 +196,9 @@ UTIL_SEQ_RegTask( 1<< CFG_TASK_RECEIVE_UART_ID, UTIL_SEQ_RFU, P2PS_Send_Notifica
 /* USER CODE END P2PS_APP_Init */
 
 \end{minted}
+
+
+
 
 
 
