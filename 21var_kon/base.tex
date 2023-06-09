@@ -1,0 +1,301 @@
+\documentclass[a4paper]{article} %размер бумаги устанавливаем А4
+% \usepackage[T2A]{fontenc}
+\usepackage{polyglossia}
+\usepackage{url} % добавляем поддержку url-ссылок
+\setmainlanguage[babelshorthands=true]{russian} % Язык по-умолчанию русский с поддержкой приятных команд пакета babel
+\setotherlanguage{english} % Дополнительный язык = английский (в американской вариации по-умолчанию)
+\newfontfamily{\cyrillicfonttt}{Times New Roman}
+
+\usepackage{minted} %пакет для подсветки кода
+\usepackage{color}
+\usepackage{xcolor} % to access the named colour LightGray
+\definecolor{LightGray}{gray}{0.9}
+\setdefaultlanguage[forceheadingpunctuation=false]{russian}
+% для отступа в первом абзаце
+\usepackage{indentfirst} 
+\parindent=1.25cm % длина отступа в абзацах
+% для продвинутых списков
+\usepackage{enumitem} 
+\usepackage{amssymb,amsfonts,amsmath,cite,enumerate,float,indentfirst} %пакеты расширений
+\usepackage{graphicx}% для вставки картинок
+\usepackage{url} % добавляем поддержку url-ссылок
+\usepackage{hyperref} % пакет для интеграции гиперссылок
+\usepackage{amsmath} % добавляем поддержку математических символов
+\usepackage{multirow} % понадобится для создания таблицы с объединенными строками
+\usepackage{pdfpages}% Добавление внешних pdf файлов
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\mdseries}
+\renewcommand{\cftsecpagefont}{\mdseries}
+\cftsetindents{section}{0em}{2em}
+\cftsetindents{subsection}{0em}{3em}
+\cftsetindents{subsubsection}{0em}{4em}
+\renewcommand\cfttoctitlefont{\hfill\normalsize\mdseries}
+\renewcommand\cftaftertoctitle{\hfill\mbox{}}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+
+\usepackage{fontspec}
+\setmainfont{Times New Roman} %шрифт 
+\graphicspath{{images/}}%путь к рисункам
+\usepackage[14pt]{extsizes} % для того чтобы задать нестандартный 14-ый размер шрифта
+
+%\makeatletter
+%\renewcommand{\@biblabel}[1]{#1.} % Заменяем библиографию с квадратных скобок на точку:
+%\makeatother
+
+
+
+
+\usepackage[tableposition=top]{caption}
+\usepackage{subcaption}
+\DeclareCaptionLabelFormat{gostfigure}{Рисунок #2}
+\DeclareCaptionLabelFormat{gosttable}{Таблица #2}
+\DeclareCaptionLabelSeparator{gost}{~–~}
+\captionsetup{labelsep=gost}
+\captionsetup[figure]{labelformat=gostfigure}
+\captionsetup[table]{labelformat=gosttable}
+\renewcommand{\thesubfigure}{\asbuk{subfigure}}
+
+
+\makeatletter
+
+\renewcommand{\section}{\@startsection{section}{1}{0pt}%
+                                {-3.5ex plus -1ex minus -.2ex}%
+                                {2.3ex plus .2ex}%
+{\centering\hyphenpenalty=10000\normalfont\normalsize\mdseries}}
+
+\renewcommand{\subsection}{\@startsection{subsection}{1}{0pt}%
+                                {-3.5ex plus -1ex minus -.2ex}%
+                                {2.3ex plus .2ex}%
+{\centering\hyphenpenalty=10000\normalfont\normalsize\mdseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{1}{0pt}%
+                                {-3.5ex plus -1ex minus -.2ex}%
+                                {2.3ex plus .2ex}%
+{\centering\hyphenpenalty=10000\normalfont\normalsize\mdseries}}
+\makeatother
+
+
+\usepackage{setspace}
+% \onehalfspacing % полуторный интервал для всего текста
+% или \singlespacing % одиночный интервал для всего текста
+% или \doublespacing % двойной интервал для всего текста
+\setstretch{1.5} % произвольный интервал
+
+% в тексте
+% \begin{onehalfspace}
+% фрагмент текста с полуторным межстрочным интервалом
+% \end{onehalfspace}
+% \begin{doublespace}
+% фрагмент текста с двойным межстрочным интервалом
+% \end{doublespace}
+
+\sloppy % выравнивание по ширине
+
+
+
+
+%%% Поля и разметка страницы %%%
+\usepackage{pdflscape}  % Для включения альбомных страниц
+\usepackage{geometry}   % Для последующего задания полей
+\geometry{left=3cm}% левое поле
+\geometry{right=1.5cm}% правое поле
+\geometry{top=2cm}% верхнее поле
+\geometry{bottom=2cm}% нижнее поле
+
+
+
+\renewcommand{\theenumi}{\arabic{enumi}}% Меняем везде перечисления на цифра.цифра
+\renewcommand{\labelenumi}{\arabic{enumi}}% Меняем везде перечисления на цифра.цифра
+\renewcommand{\theenumii}{.\arabic{enumii}}% Меняем везде перечисления на цифра.цифра
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}.}% Меняем везде перечисления на цифра.цифра
+\renewcommand{\theenumiii}{.\arabic{enumiii}}% Меняем везде перечисления на цифра.цифра
+\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.}% Меняем везде перечисления на цифра.цифра
+
+
+
+\newcommand{\imgh}[3]{\begin{figure}[h]\center{\includegraphics[width=#1]{#2}}\caption{#3}\label{ris:#2}\end{figure}}
+\newcommand{\imghh}[3]{\begin{figure}[H]\center{\includegraphics[width=#1]{#2}}\caption{#3}\label{ris:#2}\end{figure}}
+
+
+\usepackage{lastpage}
+\usepackage{totcount}
+\newcounter{totfigures}
+\newcounter{tottables}
+\newcounter{totreferences}
+
+\makeatletter
+    \AtEndDocument{%
+      \addtocounter{totfigures}{\value{figure}}%
+      \addtocounter{tottables}{\value{table}}%
+	  
+      \immediate\write\@mainaux{%
+        \string\gdef\string\totfig{\number\value{totfigures}}%
+        \string\gdef\string\tottab{\number\value{tottables}}%   
+
+      }%
+    }
+\makeatother
+
+	
+
+\newcommand{\empline}{\mbox{}\newline}
+\newcommand{\likechapterheading}[1]{ 
+    \begin{center}
+   \MakeUppercase{#1}
+    \end{center}
+    \empline}
+
+
+
+\makeatletter
+    \renewcommand{\@dotsep}{2}
+    \newcommand{\l@likechapter}[2]{{\@dottedtocline{0}{0pt}{0pt}{#1}{#2}}}
+\makeatother
+\newcommand{\likechapter}[1]{    
+    \likechapterheading{#1}    
+    \addcontentsline{toc}{likechapter}{\MakeUppercase{#1}}}
+
+
+\usepackage{cite} % Красивые ссылки на литературу
+
+
+%% Список литературы с красной строки (без висячего отступа) %%%
+\patchcmd{\thebibliography} %может потребовать включения пакета etoolbox
+ {\advance\leftmargin\labelsep}
+ {\leftmargin=0pt%
+  \setlength{\labelsep}{\widthof{\ }}% Управляет длиной отступа после точки
+  \itemindent=\parindent%
+  \addtolength{\itemindent}{\labelwidth}% Сдвигаем правее на величину номера с точкой
+  \advance\itemindent\labelsep%
+ }
+ {}{}
+
+
+\makeatletter
+\def\@biblabel#1{#1 }
+\makeatother
+
+
+% настройки цветовой палитры для гиперссылок. Цвета можно на свой вкус выбрать здесь:  https://www.overleaf.com/learn/latex/Using_colours_in_LaTeX
+\hypersetup{
+    citecolor=gray, % цвет цитирования
+    colorlinks=true, 
+    linkcolor=black, % цвет для гиперссылок 
+    filecolor=magenta, % цвет для ссылок на файл      
+    urlcolor=mauve} % цвет для url-ссылок
+    \usepackage{listings}
+
+\usepackage{color}
+\definecolor{dkgreen}{rgb}{0,0.6,0} 
+\definecolor{gray}{rgb}{0.3,0.3,0.3}
+\definecolor{mauve}{rgb}{0.42,0,0.92}
+
+
+
+\let\bfseries\mdseries 
+% грязный хак для удаления жирного текста по всему документу
+
+\usepackage[version=3]{acro}
+
+\DeclareAcroProperty{unit}
+
+\DeclareAcronym{BLE}{ 
+    short = {BLE}, 
+    long  = {Bluetooth Low-Energy },
+	unit = --, 
+}
+
+\DeclareAcronym{AFE}{
+    short = {AFE},
+    long  = {Analog Front End},
+	unit = --, 
+}
+
+\DeclareAcronym{АЦП}{
+  short            = АЦП ,
+  long             = Аналого-цифровой преобразователь ,
+	unit = --, 
+}
+
+
+\DeclareAcronym{ЭКГ}{
+  short            = ЭКГ ,
+  long             = Электрокардиограмма ,
+  unit = --, 
+}
+
+\acsetup{
+  make-links,
+  list/heading = empty,
+  % pages/display = all ,
+  pages/fill = {, },
+}
+
+
+\usepackage{longtable,siunitx}
+
+\NewAcroTemplate[list]{physics}{%
+  \acronymsmapT{%
+    \AcroAddRow{%
+      \acrowrite{short}%
+      &
+      \acrowrite{unit}%
+      &
+      \acrowrite{list}%
+      &
+      \acropages
+        {\acrotranslate{page}\nobreakspace}%
+        {\acrotranslate{pages}\nobreakspace}%
+      \tabularnewline
+    }%
+  }%
+  
+  
+  \acroheading
+  \acropreamble
+  
+  \par\noindent
+  \setlength\LTleft{0pt}%
+  \setlength\LTright{0pt}%
+  
+  \begin{longtable}{@{}lll@{\extracolsep{\fill}}l@{}}
+    \AcronymTable
+  \end{longtable}
+}
+
+
+	
+\begin{document}
+
+\input{01_title}% это титульный лист
+\includepdf[pages={-}]{1.pdf}
+
+
+% \input{02_task}% это задание
+\input{03_referat}% это реферат
+% \input{04_cont}% это содержание
+% \input{05_intro}% это введение
+% \input{06_structure}% это раздел структурной схемы
+% \input{07_princip}% это раздел принципиальной схемы
+% \input{08_program}% это раздел принципиальной схемы
+% \input{09_final}% это заключение
+% \input{10_biblio}% это список использованных источников
+% \input{11_socr}% это список cокращений и источников
+
+
+
+% \input{RefProject-base}% осн часть
+
+
+%\begin{landscape}
+% текст в альбомной ориентации
+% (таблица, рисунок, схема и т. п.)
+%\end{landscape}
+
+% \likechapter{Вступление}
+
+
+
+
+
+
+\end{document}
